@@ -1,7 +1,7 @@
 // Windows based Jenkins file that automates Veracode SCA and Pipeline scan. 
 // Script is based off of documentation (https://help.veracode.com/reader/tS9CaFwL4_lbIEWWomsJoA/MVXQBY1PzfrTXGd6V~ZgxA) 
 // and has been converted to work on a Windows based Jenkins machine. 
-// Add a SRCCLR_API_TOKEN and VERACODE_API_ACCOUNT API ID/KEY.
+// Add a SCA_Token and veracode_login ID/KEY.
 // Stores results.json file
 
 
@@ -18,7 +18,7 @@ pipeline {
         }
 		stage('SCA') {
 		environment {
-			SRCCLR_API_TOKEN = credentials('SRCCLR_API_TOKEN')
+			SRCCLR_API_TOKEN = credentials('SCA_Token')
 		}
 			steps {
 				powershell """
@@ -31,7 +31,7 @@ pipeline {
 		 
 		stage('Veracode Pipeline Scan') {
 		environment {
-			SERVICE_CREDS = credentials('VERACODE_API_ACCOUNT')
+			SERVICE_CREDS = credentials('veracode_login')
 			}
 		    
 		steps {	
